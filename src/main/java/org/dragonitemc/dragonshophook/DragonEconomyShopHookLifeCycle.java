@@ -12,20 +12,29 @@ import org.dragonitemc.dragonshophook.dshop.GemsReward;
 import org.dragonitemc.dragonshophook.dshop.WRLDPrice;
 import org.dragonitemc.dragonshophook.dshop.WRLDReward;
 
+import javax.inject.Inject;
+
 public class DragonEconomyShopHookLifeCycle implements ELDLifeCycle {
+
+    @Inject
+    private GemsPrice gemsPrice;
+    @Inject
+    private GemsReward gemsReward;
+    @Inject
+    private WRLDPrice wrldPrice;
+    @Inject
+    private WRLDReward wrldReward;
+
+    @Inject
+    private ShopTaskService taskService;
 
     @Override
     public void onEnable(JavaPlugin plugin) {
-        EconomyService economyService = ELDependenci.getApi().exposeService(EconomyService.class);
-        NFTokenService tokenService = ELDependenci.getApi().exposeService(NFTokenService.class);
-        ShopTaskService taskService = ELDependenci.getApi().exposeService(ShopTaskService.class);
-        DragonEconomyMessage message = ELDependenci.getApi().exposeService(DragonEconomyMessage.class);
+        taskService.addPriceTask(gemsPrice);
+        taskService.addRewardTask(gemsReward);
 
-        taskService.addPriceTask(new GemsPrice(economyService, message));
-        taskService.addRewardTask(new GemsReward(message, economyService));
-
-        taskService.addPriceTask(new WRLDPrice(tokenService));
-        taskService.addRewardTask(new WRLDReward(tokenService));
+        taskService.addPriceTask(wrldPrice);
+        taskService.addRewardTask(wrldReward);
     }
 
     @Override

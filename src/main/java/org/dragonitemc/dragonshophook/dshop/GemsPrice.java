@@ -9,17 +9,18 @@ import org.dragonitemc.dragonshop.ShopException;
 import org.dragonitemc.dragonshop.api.AsyncPriceTask;
 import org.dragonitemc.dragonshop.api.PurchaseResult;
 
+import javax.inject.Inject;
 import java.util.concurrent.CompletableFuture;
 
 public final class GemsPrice extends AsyncPriceTask<Object> {
 
-    private final EconomyService economyService;
-    private final DragonEconomyMessage msg;
+    @Inject
+    private EconomyService economyService;
+    @Inject
+    private DragonEconomyMessage msg;
 
-    public GemsPrice(EconomyService economyService, DragonEconomyMessage msg) {
+    public GemsPrice() {
         super("gems");
-        this.economyService = economyService;
-        this.msg = msg;
     }
 
     static double toDouble(Object price, Player player){
