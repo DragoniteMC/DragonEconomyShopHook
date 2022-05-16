@@ -1,0 +1,6 @@
+name: DragonEconomyShopHook
+version: ${project.version}
+main: org.dragonitemc.dragonshophook.DragonEconomyShopHook
+depend:
+  - DragonEconomy
+  - DragonShop
