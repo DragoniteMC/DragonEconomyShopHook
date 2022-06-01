@@ -15,12 +15,12 @@ public final class WRLDPrice extends AsyncPriceTask<Object> {
     private NFTokenService tokenService;
 
     public WRLDPrice() {
-        super("wrld");
+        super("web3_wrld");
     }
 
     @Override
     public CompletableFuture<PurchaseResult> doPurchaseAsync(Object content, Player player) {
-        var price = GemsPrice.toDouble(content, player);
+        var price = LocalWrldPrice.toDouble(content, player);
         if (tokenService.getTokenPrice(player) < price){
             return CompletableFuture.completedFuture(PurchaseResult.failed("insufficient tokens"));
         }
@@ -33,7 +33,7 @@ public final class WRLDPrice extends AsyncPriceTask<Object> {
 
     @Override
     public CompletableFuture<Void> doRollBackAsync(Object content, Player player) {
-        var aDouble = GemsPrice.toDouble(content, player);
+        var aDouble = LocalWrldPrice.toDouble(content, player);
         tokenService.depositToken(player, aDouble,  "&eDragonShop 交易&r");
         return CompletableFuture.completedFuture(null);
     }

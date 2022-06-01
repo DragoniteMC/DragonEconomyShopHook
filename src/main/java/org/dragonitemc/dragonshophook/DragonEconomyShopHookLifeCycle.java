@@ -1,14 +1,10 @@
 package org.dragonitemc.dragonshophook;
 
-import com.ericlam.mc.eld.ELDLifeCycle;
-import com.ericlam.mc.eld.ELDependenci;
+import com.ericlam.mc.eld.bukkit.ELDLifeCycle;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.dragonitemc.dragoneconomy.api.EconomyService;
-import org.dragonitemc.dragoneconomy.api.NFTokenService;
-import org.dragonitemc.dragoneconomy.config.DragonEconomyMessage;
 import org.dragonitemc.dragonshop.api.ShopTaskService;
-import org.dragonitemc.dragonshophook.dshop.GemsPrice;
-import org.dragonitemc.dragonshophook.dshop.GemsReward;
+import org.dragonitemc.dragonshophook.dshop.LocalWrldPrice;
+import org.dragonitemc.dragonshophook.dshop.LocalWrldReward;
 import org.dragonitemc.dragonshophook.dshop.WRLDPrice;
 import org.dragonitemc.dragonshophook.dshop.WRLDReward;
 
@@ -17,9 +13,9 @@ import javax.inject.Inject;
 public class DragonEconomyShopHookLifeCycle implements ELDLifeCycle {
 
     @Inject
-    private GemsPrice gemsPrice;
+    private LocalWrldPrice localWrldPrice;
     @Inject
-    private GemsReward gemsReward;
+    private LocalWrldReward localWrldReward;
     @Inject
     private WRLDPrice wrldPrice;
     @Inject
@@ -30,8 +26,8 @@ public class DragonEconomyShopHookLifeCycle implements ELDLifeCycle {
 
     @Override
     public void onEnable(JavaPlugin plugin) {
-        taskService.addPriceTask(gemsPrice);
-        taskService.addRewardTask(gemsReward);
+        taskService.addPriceTask(localWrldPrice);
+        taskService.addRewardTask(localWrldReward);
 
         taskService.addPriceTask(wrldPrice);
         taskService.addRewardTask(wrldReward);

@@ -12,15 +12,15 @@ import org.dragonitemc.dragonshop.api.PurchaseResult;
 import javax.inject.Inject;
 import java.util.concurrent.CompletableFuture;
 
-public final class GemsPrice extends AsyncPriceTask<Object> {
+public final class LocalWrldPrice extends AsyncPriceTask<Object> {
 
     @Inject
     private EconomyService economyService;
     @Inject
     private DragonEconomyMessage msg;
 
-    public GemsPrice() {
-        super("gems");
+    public LocalWrldPrice() {
+        super("wrld");
     }
 
     static double toDouble(Object price, Player player){
@@ -48,7 +48,7 @@ public final class GemsPrice extends AsyncPriceTask<Object> {
             }
         }
 
-        throw new ShopException("設置錯誤", "不支援的 Gems 類型: " + price.getClass().getName() + ", 只支援: Double, Integer, Float, String");
+        throw new ShopException("設置錯誤", "不支援的 Wrld 類型: " + price.getClass().getName() + ", 只支援: Double, Integer, Float, String");
     }
 
 

@@ -12,13 +12,13 @@ public class WRLDReward extends RewardTask<Object> {
     private NFTokenService tokenService;
 
     public WRLDReward() {
-        super("wrld");
+        super("web3_wrld");
     }
 
 
     @Override
     public void giveReward(Object c, Player player) {
-        var price = GemsPrice.toDouble(c, player);
+        var price = LocalWrldPrice.toDouble(c, player);
         tokenService.depositToken(player, price, "&eDragonShop 的交易");
     }
 }

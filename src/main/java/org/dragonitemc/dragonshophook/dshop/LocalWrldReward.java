@@ -8,7 +8,7 @@ import org.dragonitemc.dragonshop.api.AsyncRewardTask;
 import javax.inject.Inject;
 import java.util.concurrent.CompletableFuture;
 
-public final class GemsReward extends AsyncRewardTask<Object> {
+public final class LocalWrldReward extends AsyncRewardTask<Object> {
 
 
     @Inject
@@ -16,13 +16,13 @@ public final class GemsReward extends AsyncRewardTask<Object> {
     @Inject
     private EconomyService economyService;
 
-    public GemsReward() {
-        super("gems");
+    public LocalWrldReward() {
+        super("wrld");
     }
 
     @Override
     public CompletableFuture<Void> giveRewardAsync(Object c, Player player) {
-        var price = GemsPrice.toDouble(c, player);
+        var price = LocalWrldPrice.toDouble(c, player);
         return CompletableFuture.runAsync(() -> {
             var result = economyService.depositPlayer(player.getUniqueId(), price);
             player.sendMessage(msg.getResultMessage(result));
